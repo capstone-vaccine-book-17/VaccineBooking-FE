@@ -7,4 +7,7 @@
   body {
     @apply font-poppins;
   }
+  input {
+    @apply rounded-md px-[20px] py-[12px] border-[1px] border-[#646464];
+  }
 }

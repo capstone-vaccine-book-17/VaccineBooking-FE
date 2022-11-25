@@ -52,13 +52,12 @@ const ManageVaccine = () => {
                 </svg>
               </div>
             </div>
-            <select
-              className="flex-[30%] bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-full p-2.5"
-              placeholder="Urut Berdasarkan"
-            >
-              <option value="">Urut Berdasarkan</option>
-              <option value="">Urut Berdasarkan</option>
-              <option value="">Urut Berdasarkan</option>
+            <select className="flex-[30%] bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-full p-2.5">
+              <option value="" disabled selected>
+                Urut Berdasarkan
+              </option>
+              <option value="">Tanggal</option>
+              <option value="">Waktu</option>
             </select>
           </form>
         </div>

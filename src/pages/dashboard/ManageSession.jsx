@@ -1,6 +1,49 @@
 import React from "react";
 
 const ManageSession = () => {
+  const data = [
+    {
+      no: 1,
+      session: "Sesi 1",
+      date: "14-11-2022",
+      time: "08.00 - 10.00",
+      jenis: "Sinovac",
+      kuota: "200",
+      dosis: "Pertama",
+      status: "Selesai",
+    },
+    {
+      no: 2,
+      session: "Sesi 2",
+      date: "14-11-2022",
+      time: "13.00 - 15.00",
+      jenis: "Corona Vac",
+      kuota: "200",
+      dosis: "Kedua",
+      status: "Proses",
+    },
+    {
+      no: 3,
+      session: "Sesi 3",
+      date: "14-11-2022",
+      time: "15.00 - 17.00",
+      jenis: "AstraZeneca",
+      kuota: "200",
+      dosis: "Ketiga",
+      status: "Proses",
+    },
+    {
+      no: 4,
+      session: "Sesi 4",
+      date: "14-11-2022",
+      time: "15.00 - 17.00",
+      jenis: "Booster",
+      kuota: "200",
+      dosis: "Keempat",
+      status: "Proses",
+    },
+  ];
+
   return (
     <>
       <section className=" bg-[#FAFAFA]">
@@ -17,7 +60,7 @@ const ManageSession = () => {
                 type="text"
                 id="simple-search"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search"
+                placeholder="Cari....."
                 required
               />
               <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -52,115 +95,48 @@ const ManageSession = () => {
             </button>
           </div>
         </section>
-        <section className="session flex justify-start items-center px-8">
-          <div className="flex flex-col">
-            <div className="overflow-x-auto">
-              <div className="w-full inline-block align-middle">
-                <div className="overflow-hidden border rounded-lg">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-white-50 text-center">
-                      <tr>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xl font-medium text-black"
-                        >
-                          No
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xl font-medium text-black"
-                        >
-                          Nama Sesi
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xl font-medium text-black"
-                        >
-                          Tanggal
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xl font-medium text-black"
-                        >
-                          Jam
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xl font-medium text-black"
-                        >
-                          Jenis
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xl font-medium text-black"
-                        >
-                          Kuota
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xl font-medium text-black"
-                        >
-                          Dosis
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xl font-medium text-black"
-                        >
-                          Status
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xl font-medium text-black"
-                        >
-                          Aksi
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 text-center">
-                      <tr>
-                        <td className="px-6 py-4 text-base font-medium text-[#373737] whitespace-nowrap">
-                          1
-                        </td>
-                        <td className="px-6 py-4 text-base text-[#373737] whitespace-nowrap">
-                          Sesi 1
-                        </td>
-                        <td className="px-6 py-4 text-base text-[#373737] whitespace-nowrap">
-                          14-11-2022
-                        </td>
-                        <td className="px-6 py-4 text-base text-[#373737] whitespace-nowrap">
-                          08.00 - 10.00
-                        </td>
-                        <td className="px-6 py-4 text-base text-[#373737] whitespace-nowrap">
-                          Sinovac
-                        </td>
-                        <td className="px-6 py-4 text-base text-[#373737] whitespace-nowrap">
-                          200
-                        </td>
-                        <td className="px-6 py-4 text-base text-[#373737] whitespace-nowrap">
-                          Pertama
-                        </td>
-                        <td className="px-6 py-4 text-base text-[#373737]  whitespace-nowrap">
-                          <p className=" bg-[#84A9FF] text-[#FAFAFA] px-[31px] py-[4px] rounded-lg">
-                            Selesai
-                          </p>
-                        </td>
-                        <td className="border-collapse">
-                          <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                            <button class="bg-red-500 hover:bg-gray-700 text-white py-2 px-4 mr-3 rounded">
-                              Hapus
-                            </button>
-                            <button class="bg-[#0057FF] hover:bg-gray-700 text-white py-2 px-4 rounded">
-                              Edit
-                            </button>
-                          </td>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+        <section className="h-full w-full px-8 mt-8">
+          <table className="w-full rounded-lg shadow-md text-[#373737] bg-white">
+            <thead>
+              <tr className="border-b-[1px]">
+                <th className="py-4">No</th>
+                <th className="py-4">Nama Sesi</th>
+                <th className="py-4">Tanggal</th>
+                <th className="py-4">Jam</th>
+                <th className="py-4">Jenis</th>
+                <th className="py-4">Kuota</th>
+                <th className="py-4">Dosis</th>
+                <th className="py-4">Status</th>
+                <th className="w-[240px] py-4">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((data) => (
+                <tr key={data.no} className="border-b-[1px]">
+                  <th className="font-normal">{data.no}</th>
+                  <th className="font-normal">{data.session}</th>
+                  <th className="font-normal">{data.date}</th>
+                  <th className="font-normal">{data.time}</th>
+                  <th className="font-normal">{data.jenis}</th>
+                  <th className="font-normal">{data.kuota}</th>
+                  <th className="font-normal">{data.dosis}</th>
+                  <th className="font-normal">
+                    <p className="bg-[#84A9FF] text-[#FAFAFA] px-[31px] py-[4px] rounded-lg">
+                      {data.status}
+                    </p>
+                  </th>
+                  <th className="w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal ">
+                    <button class="bg-red-500 hover:bg-gray-700 text-white py-2 px-4 mr-3 rounded">
+                      <img src="" alt="del" />
+                    </button>
+                    <button class="bg-[#0057FF] hover:bg-gray-700 text-white py-2 px-4 rounded">
+                      <img src="" alt="edit" />
+                    </button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </section>
       </section>
     </>

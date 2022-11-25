@@ -1,5 +1,4 @@
 import React from "react";
-import RecapCard from "../../components/RecapCard";
 import RecapDashboard from "../../components/RecapDashboard";
 
 const ManageVaccine = () => {
@@ -45,8 +44,12 @@ const ManageVaccine = () => {
               <th className="font-normal">{data.kuota}</th>
               <th className="font-normal">{data.expired}</th>
               <th className="w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal">
-                <img src="" alt="del" />
-                <img src="" alt="edit" />
+                <button class="bg-red-500 hover:bg-gray-700 text-white py-2 px-4 mr-3 rounded">
+                  <img src="" alt="del" />
+                </button>
+                <button class="bg-[#0057FF] hover:bg-gray-700 text-white py-2 px-4 rounded">
+                  <img src="" alt="edit" />
+                </button>
               </th>
             </tr>
           ))}

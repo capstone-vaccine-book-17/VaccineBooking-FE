@@ -83,7 +83,7 @@ const ManageSession = () => {
             </select>
           </form>
         </div>
-        <ButtonAdd pathFor="add-sesi" btnFor="Tambah Sesi" />
+        <ButtonAdd pathFor="/dashboard/add-sesi" btnFor="Tambah Sesi" />
       </div>
       <table className="w-full rounded-lg shadow-md text-[#373737] bg-white">
         <thead>

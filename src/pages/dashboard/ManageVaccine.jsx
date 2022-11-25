@@ -61,7 +61,7 @@ const ManageVaccine = () => {
             </select>
           </form>
         </div>
-        <ButtonAdd pathFor="add-vaksin" btnFor="Tambah Vaksin" />
+        <ButtonAdd pathFor="/dashboard/add-vaksin" btnFor="Tambah Vaksin" />
       </div>
       <table className="w-full rounded-lg shadow-md text-[#373737] bg-white">
         <thead>

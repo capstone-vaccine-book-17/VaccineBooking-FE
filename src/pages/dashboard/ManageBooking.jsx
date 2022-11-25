@@ -73,7 +73,7 @@ const ManageBooking = () => {
             </select>
           </form>
         </div>
-        <ButtonAdd pathFor="/dashboard/add-sesi" btnFor="Tambah Booking" />
+        <ButtonAdd pathFor="/dashboard/add-booking" btnFor="Tambah Booking" />
       </div>
       <table className="w-full rounded-lg shadow-md text-[#373737] bg-white">
         <thead>

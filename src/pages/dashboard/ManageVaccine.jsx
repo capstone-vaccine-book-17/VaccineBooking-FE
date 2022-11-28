@@ -1,6 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ButtonAdd from "../../components/ButtonAdd";
 import RecapDashboard from "../../components/RecapDashboard";
+import Delete from "../../assets/trash.svg";
+import Edit from "../../assets/edit.svg";
 
 const ManageVaccine = () => {
   const datas = [
@@ -61,7 +64,7 @@ const ManageVaccine = () => {
             </select>
           </form>
         </div>
-        <ButtonAdd pathFor="/dashboard/add-vaksin" btnFor="Tambah Vaksin" />
+        <ButtonAdd pathFor="add-vaksin" btnFor="Tambah Vaksin" />
       </div>
       <table className="w-full rounded-lg shadow-md text-[#373737] bg-white">
         <thead>
@@ -81,12 +84,15 @@ const ManageVaccine = () => {
               <th className="font-normal">{data.kuota}</th>
               <th className="font-normal">{data.expired}</th>
               <th className="w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal">
-                <button className="bg-red-500 hover:bg-gray-700 text-white py-2 px-4 mr-3 rounded">
-                  <img src="" alt="del" />
+                <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded">
+                  <img src={Delete} alt="del" />
                 </button>
-                <button className="bg-[#0057FF] hover:bg-gray-700 text-white py-2 px-4 rounded">
-                  <img src="" alt="edit" />
-                </button>
+                <Link
+                  to="edit-vaksin"
+                  className="bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded"
+                >
+                  <img src={Edit} alt="edit" />
+                </Link>
               </th>
             </tr>
           ))}

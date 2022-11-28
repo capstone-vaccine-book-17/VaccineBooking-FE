@@ -1,8 +1,10 @@
 import React from "react";
+import TopSection from "../../../components/TopSection";
 
 const AddBooking = () => {
   return (
     <section className="h-full w-full px-8 mt-8">
+      <TopSection title="Tambah Booking" />
       <div className="w-full bg-white rounded-md p-8 shadow-md">
         <form className="flex justify-between gap-60" action="">
           <div className="flex-1 space-y-8">

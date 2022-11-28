@@ -8,9 +8,9 @@ const Topbar = () => {
         <div>
           <h1 className="text-2xl">Welcome</h1>
         </div>
-        <div className="flex gap-12">
-          <img src={Notify} alt="icon" />
-          <img src="" alt="profile" />
+        <div className="flex items-center gap-12">
+          <img className="w-8 h-8" src={Notify} alt="icon" />
+          <div className="w-14 h-14 rounded-full bg-blue-700"></div>
         </div>
       </nav>
     </div>

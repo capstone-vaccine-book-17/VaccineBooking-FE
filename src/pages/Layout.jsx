@@ -6,11 +6,13 @@ import Topbar from "../components/Topbar";
 const Layout = () => {
   return (
     <>
-      <main className="flex">
+      <main className="flex h-screen">
         <Sidebar />
         <div className="w-full flex flex-col">
           <Topbar />
-          <Outlet />
+          <div className="overflow-y-scroll">
+            <Outlet />
+          </div>
         </div>
       </main>
     </>

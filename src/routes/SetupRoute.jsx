@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AdminProfile from "../pages/dashboard/AdminProfile";
 import AddBooking from "../pages/dashboard/forms/AddBooking";
 import AddSession from "../pages/dashboard/forms/AddSession";
 import AddVaccine from "../pages/dashboard/forms/AddVaccine";
@@ -39,6 +40,7 @@ const SetupRoute = () => {
             <Route path="add-booking" element={<AddBooking />} />
             <Route path="edit-booking" element={<EditBooking />} />
           </Route>
+          <Route path="profile" element={<AdminProfile />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

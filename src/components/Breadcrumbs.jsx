@@ -8,12 +8,10 @@ const Breadcrumbs = () => {
   return (
     <div className="flex gap-2">
       {breadcrumbs.map(({ breadcrumb, match }, i) => (
-        <>
-          <NavLink key={breadcrumb} to={match.pathname}>
-            {breadcrumb}
-          </NavLink>
+        <div key={i}>
+          <NavLink to={match.pathname}>{breadcrumb}</NavLink>
           {i !== breadcrumbs.length - 1 && <span> / </span>}
-        </>
+        </div>
       ))}
     </div>
   );

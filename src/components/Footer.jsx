@@ -55,7 +55,7 @@ const Footer = () => {
             <div className="flex flex-row gap-[16px]">
               <button
                 type="button"
-                class="text-white bg-[#3366FF] rounded-lg hover:bg-[#3366FF]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                className="text-white bg-[#3366FF] rounded-lg hover:bg-[#3366FF]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
               >
                 <img className="w-[40px] mr-2" src={googlePlay} alt="" />
                 <a
@@ -68,7 +68,7 @@ const Footer = () => {
               </button>
               <button
                 type="button"
-                class="text-white bg-[#050708] rounded-lg hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                className="text-white bg-[#050708] rounded-lg hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
               >
                 <img className="w-[40px] mr-2" src={appleLogo} alt="" />
                 <a

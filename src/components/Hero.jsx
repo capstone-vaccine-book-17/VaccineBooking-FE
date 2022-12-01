@@ -47,7 +47,7 @@ const Hero = () => {
             </button>
           </div>
         </div>
-        <div className="mr-40">
+        <div className="mr-40 mb-[50px] mt-5">
           <img src={frameWVAC} alt="" />
         </div>
       </div>

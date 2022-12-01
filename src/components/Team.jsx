@@ -1,94 +1,72 @@
 import React from "react";
-import UIUX from '../assets/UIUX.svg';
-import BE from '../assets/BE.svg';
-import FE from '../assets/FE.svg';
-import QE from '../assets/QE.svg';
+import LogoUI from "../assets/LogoUIUX.png";
+import LogoBE from "../assets/logoBE.png";
+import LogoFE from "../assets/logoFE.png";
+import LogoQA from "../assets/logoQA.png";
 
 const Team = () => {
   return (
-    <section className="w-screen flex justify-center text-6xl">
-      <div>
-      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <div className="mx-auto mb-10 lg:max-w-xl sm:text-center">
-        <p className="inline-block px-3 py-px mb-4 text-xl font-Poppins tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-          Tim Kami
-        </p>
-      </div>
-      <div className="w-full flex gap-10 justify-between">
-        <div>
-          <div className="mx-auto relative pb-56 mb-4 rounded shadow lg:pb-64">
-            <img
-              className="absolute object-cover w-full h-full rounded"
-              src={UIUX}
-              alt="Person"
-            />
+    <section id="team" className="w-full py-60">
+      <div className="w-full flex flex-col gap-16 justify-center items-center">
+        <p className="font-semibold text-[28px]">Tim Kami</p>
+        <div className="w-full px-16 flex justify-between">
+          <div className="flex flex-col items-center gap-6 text-[14px] font-medium">
+            <div className="w-40 h-40 flex justify-center items-center rounded-3xl bg-gradient-to-r from-[#FFCF00] to-[#EB5E03]">
+              <img src={LogoUI} alt="" />
+            </div>
+            <ul className="list-decimal">
+              <li>Tengku Hamdi</li>
+              <li>Afifah Cahyaningsih</li>
+              <li>Ilham Ismail</li>
+              <li>Eridani Wahyu Nugraha</li>
+              <li>Gilang Eko Prasetyo</li>
+            </ul>
           </div>
-          <div className="flex flex-col sm:text-center">
-            <p className="text-start text-base text-gray-800">1. Tengku Mahmudi</p>
-            <p className="text-start text-base text-gray-800">2. AFIFAH CAHYANINGSIH</p>
-            <p className="text-start text-base text-gray-800">3. Ilham Ismail</p>
-            <p className="text-start text-base text-gray-800">4. ERIDANI WAHYU NUGRAHA</p>
-            <p className="text-start text-base text-gray-800">5. GILANG EKO PRASETYO</p>
-            <div className="flex items-center space-x-3 sm:justify-center">
+          <div className="flex flex-col items-center gap-6">
+            <div className="w-40 h-40 flex justify-center items-center rounded-3xl bg-[#E2F7FE]">
+              <img src={LogoBE} alt="" />
+            </div>
+            <ul className="list-decimal">
+              <li>Muhammad Fachrudin Thohari</li>
+              <li>Kadek Dika Rama Suryadi</li>
+            </ul>
+          </div>
+          <div className="flex flex-col items-center gap-6">
+            <div className="w-40 h-40 flex justify-center items-center rounded-3xl bg-[#2F414D]">
+              <img src={LogoFE} alt="" />
+            </div>
+            <div>
+              <ul className="list-disc">
+                <li>Website</li>
+              </ul>
+              <ul className="list-decimal">
+                <li>Erwin Purnomo</li>
+                <li>Yudha Panca Pranata</li>
+                <li>Halimah</li>
+                <li>Chycik Ayu Winata</li>
+              </ul>
+              <ul className="list-disc">
+                <li>Mobile</li>
+              </ul>
+              <ul className="list-decimal">
+                <li>Rivaldi Hidayat</li>
+                <li>Nobertus Dewa Rucci</li>
+                <li>Benediktus Satriya Mukti</li>
+                <li>Sanchico Ryan Alamsyah</li>
+                <li>Ruslan</li>
+              </ul>
             </div>
           </div>
-        </div>
-        <div>
-          <div className="mx-auto relative pb-56 mb-4 rounded shadow lg:pb-64">
-            <img
-              className="absolute object-cover w-full h-full rounded"
-              src={BE}
-              alt="Person"
-            />
-          </div>
-          <div className="flex flex-col sm:text-center">
-          <p className="text-start text-base text-gray-800">1. MUHAMMAD FACHRUDIN THOHARI</p>
-            <p className="text-start text-base text-gray-800">2. KADEK DIKA RAMA SURYADI</p>
-            <div className="flex items-center space-x-3 sm:justify-center">
+          <div className="flex flex-col items-center gap-6">
+            <div className="w-40 h-40 flex justify-center items-center rounded-3xl bg-[#254D70]">
+              <img src={LogoQA} alt="" />
             </div>
+            <ul className="list-decimal">
+              <li>Moch. Yusuf Efendi</li>
+              <li>Muh. Fiqram Maulana</li>
+            </ul>
           </div>
         </div>
-        <div>
-          <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
-            <img
-              className="absolute object-cover w-full h-full rounded"
-              src={FE}
-              alt="Person"
-            />
-          </div>
-          <div className="flex flex-col sm:text-center">
-          <p className="text-start text-base text-gray-800">WEBSITE</p>
-            <p className="text-start text-base text-gray-800">1. ERWIN PURNOMO</p>
-            <p className="text-start text-base text-gray-800">2. YUDHA PANCA PRANATA</p>
-            <p className="text-start text-base text-gray-800">3. HALIMAH</p>
-            <p className="text-start text-base text-gray-800">4. Chyci Ayu Winata</p>
-            <p className="text-start text-base text-gray-800">MOBILE</p>
-            <p className="text-start text-base text-gray-800">1. RIVALDI HIDAYAT</p>
-            <p className="text-start text-base text-gray-800">2. NORBERTUS DEWA RUCCI</p>
-            <p className="text-start text-base text-gray-800">3. BENEDIKTUS SATRIYA MUKTI</p>
-            <p className="text-start text-base text-gray-800">4. Sanchico Ryan Almsyah</p>
-            <p className="text-start text-base text-gray-800">5. RUSLAN</p>
-            <div className="flex items-center space-x-3 sm:justify-center">
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
-            <img
-              className="absolute object-cover w-full h-full rounded"
-              src={QE}
-              alt="Person"
-            />
-          </div>
-          <div className="flex flex-col sm:text-center">
-          <p className="text-start text-base text-gray-800">1. MOCH. YUSUF EFENDI</p>
-            <p className="text-start text-base text-gray-800">2. MUH. FIQRAM MAULANA</p>
-            <div className="flex items-center space-x-3 sm:justify-center">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
       </div>
     </section>
   );

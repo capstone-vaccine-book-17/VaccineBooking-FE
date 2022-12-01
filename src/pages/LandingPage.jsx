@@ -8,7 +8,7 @@ import Team from "../components/Team";
 
 const LandingPage = () => {
   return (
-    <main className="w-screen">
+    <main>
       <Navbar />
       <Hero />
       <Features />

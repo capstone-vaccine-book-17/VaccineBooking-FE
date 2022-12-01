@@ -9,7 +9,7 @@ import appleLogo from "../assets/appleLogo.svg";
 
 const Footer = () => {
   return (
-    <footer className="w-screen flex justify-center flex-col">
+    <footer className="w-full flex justify-center flex-col">
       <div className="w-full text-[#FFFFFF] bg-[#091A7A] px-16 py-8">
         <div className="grid grid-cols-4 gap-x-2">
           <div className="flex flex-row">

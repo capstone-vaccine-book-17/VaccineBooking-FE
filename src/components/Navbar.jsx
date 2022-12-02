@@ -10,7 +10,7 @@ const Navbar = () => {
     },
     {
       menu: "Layanan",
-      path: "#features",
+      path: "#feature",
     },
     {
       menu: "Tentang Kami",
@@ -24,27 +24,27 @@ const Navbar = () => {
 
   return (
     <header className="flex justify-center">
-      <nav className="w-full fixed bg-white py-4 px-8 drop-shadow-sm">
+      <nav className="w-full fixed z-10 bg-white py-4 px-8 drop-shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div>
               <img className="w-10" src={Logo} alt="" />
             </div>
-            <Link className="text-[#050505] text-[32px] font-semibold">
+            <a href="hero" className="text-[#050505] text-[32px] font-semibold">
               <span className="text-[#3366FF]">W</span>
               <span className="text-[#FF312D]">V</span>accine
-            </Link>
+            </a>
           </div>
           <div className="flex items-center gap-10">
             <div className="flex gap-8">
               {listMenu.map((list) => (
-                <Link
-                  to={list.path}
+                <a
+                  href={list.path}
                   key={list.menu}
                   className="text-[#646464] hover:text-[#3366FF] text-[18px] font-medium"
                 >
                   {list.menu}
-                </Link>
+                </a>
               ))}
             </div>
             <div className="flex items-center gap-4 font-medium text-[18px]">

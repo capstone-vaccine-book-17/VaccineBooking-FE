@@ -5,7 +5,7 @@ import frameWVAC from "../assets/frameWVAC.svg";
 
 const Hero = () => {
   return (
-    <section className="w-full flex pt-20">
+    <section id="hero" className="w-full flex pt-20">
       <div className="w-full flex flex-row justify-around items-center">
         <div className="mx-40">
           <div className="text-[32px] font-semibold mb-4">

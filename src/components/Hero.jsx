@@ -1,6 +1,6 @@
 import React from "react";
 import googlePlay from "../assets/googlePlay.svg";
-import appleLogo from "../assets/appleLogo.svg";
+import LogoWhite from "../assets/LogoWhite.svg";
 import frameWVAC from "../assets/frameWVAC.svg";
 
 const Hero = () => {
@@ -36,7 +36,7 @@ const Hero = () => {
               type="button"
               className="text-white bg-[#050708] rounded-lg hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
             >
-              <img className="w-[40px] mr-2" src={appleLogo} alt="" />
+              <img className="w-[40px] mr-2" src={LogoWhite} alt="" />
               <a
                 className="text-left text-[14px] font-medium"
                 href="https://www.apple.com/id/app-store/"

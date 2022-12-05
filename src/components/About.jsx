@@ -4,7 +4,7 @@ import polygon from "../assets/polygon.svg";
 
 const About = () => {
   return (
-    <section id="about" className="w-full">
+    <section id="about" className="w-full pt-20">
       <div className="w-full">
         <div className="flex justify-center text-4xl font-semibold mt-10">
           <h1>Tentang World Vaccine</h1>

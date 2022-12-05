@@ -1,9 +1,9 @@
 import axiosInstance from "../configs/AxiosInstance";
 
-const sessionAPI = {
-  async getAllSession() {
+const bookingAPI = {
+  async booking(data) {
     try {
-      const res = await axiosInstance.get("/v1/session/");
+      const res = await axiosInstance.post("/v1/booking/", data);
       return res;
     } catch (err) {
       console.log(err);
@@ -11,4 +11,4 @@ const sessionAPI = {
   },
 };
 
-export default sessionAPI;
+export default bookingAPI;

@@ -1,10 +1,21 @@
-import React from 'react';
+import React from "react";
+import About from "../components/About";
+import Features from "../components/Features";
+import Footer from "../components/Footer";
+import Hero from "../components/Hero";
+import Navbar from "../components/Navbar";
+import Team from "../components/Team";
 
 const LandingPage = () => {
   return (
-    <div className='h-screen flex justify-center items-center text-6xl'>
-      LandingPage
-    </div>
+    <main>
+      <Navbar />
+      <Hero />
+      <Features />
+      <About />
+      <Team />
+      <Footer />
+    </main>
   );
 };
 

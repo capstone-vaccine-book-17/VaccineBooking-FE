@@ -4,6 +4,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
   body {
     @apply font-poppins bg-[#fafafa];
   }

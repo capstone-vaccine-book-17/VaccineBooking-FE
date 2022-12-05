@@ -1,9 +1,9 @@
 import { axiosInstance } from "../configs/axiosInstance";
 
-const adminAPI = {
-  async login(data) {
+const sessionAPI = {
+  async getAllSession() {
     try {
-      const res = await axiosInstance.post("/auth/login", data);
+      const res = await axiosInstance.get("/v1/session/");
       return res;
     } catch (err) {
       console.log(err);
@@ -11,4 +11,4 @@ const adminAPI = {
   },
 };
 
-export default adminAPI;
+export default sessionAPI;

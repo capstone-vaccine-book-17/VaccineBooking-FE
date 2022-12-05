@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import Logo from "../assets/Logo.png";
+import { loginAdmin } from "../store/features/adminSlice";
+import { useNavigate } from "react-router-dom";
+import { authAdmin } from "../utils/authAdmin";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const admin = useSelector((state) => state.admin.data);
+  const navigate = useNavigate();
+
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const handleLogin = () => {
-    console.log(errors.username?.message);
-    console.log(errors.password?.message);
+    dispatch(loginAdmin(getValues()));
   };
+
+  useEffect(() => {
+    if (admin !== null || undefined) {
+      authAdmin.setLogin(admin);
+      return navigate("/dashboard");
+    } else {
+      return navigate("/login");
+    }
+  }, [admin]);
 
   return (
     <section className="flex h-screen justify-center items-center p-40 px-60">
@@ -28,6 +45,7 @@ const LoginPage = () => {
         </div>
         <div className="flex-[60%] w-full px-40">
           <form
+            onChange={() => getValues()}
             onSubmit={handleSubmit(handleLogin)}
             className="flex h-full flex-col justify-center items-center gap-y-2"
           >

@@ -1,4 +1,4 @@
-import { axiosInstance } from "../configs/axiosInstance";
+import { axiosInstance } from "../configs/AxiosInstance";
 
 const sessionAPI = {
   async getAllSession() {

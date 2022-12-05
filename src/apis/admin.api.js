@@ -1,4 +1,4 @@
-import { axiosInstance } from "../configs/axiosInstance";
+import { axiosInstance } from "../configs/AxiosInstance";
 
 const adminAPI = {
   async login(data) {

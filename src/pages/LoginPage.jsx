@@ -29,7 +29,7 @@ const LoginPage = () => {
     } else {
       return navigate("/login");
     }
-  }, [admin]);
+  }, [admin, navigate]);
 
   return (
     <section className="flex h-screen justify-center items-center p-40 px-60">
@@ -61,7 +61,7 @@ const LoginPage = () => {
               <p className="text-red-700">{errors.username?.message}</p>
             </div>
             <div className="flex flex-col w-full">
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 placeholder="Masukkan Password"

@@ -23,7 +23,7 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (admin !== null || undefined) {
+    if (admin) {
       authAdmin.setLogin(admin);
       return navigate("/dashboard");
     } else {

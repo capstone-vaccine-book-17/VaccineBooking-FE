@@ -16,8 +16,7 @@ export const fetchVaccine = createAsyncThunk("/v1/vaccine/view", async () => {
     }
 });
 
-export const createVaccine = createAsyncThunk(
-    "/v1/vaccine/create",
+export const createVaccine = createAsyncThunk("getVaccine",
     async (dataVaccine) => {
       try {
         const res = await vaccineAPI.addVaccine(dataVaccine);
@@ -26,9 +25,7 @@ export const createVaccine = createAsyncThunk(
       } catch (err) {
         console.log(err);
       }
-    }
-  );
-
+    });
 
 const vaccineSlice = createSlice({
     name: "vaccine",

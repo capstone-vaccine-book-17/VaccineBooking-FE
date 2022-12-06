@@ -5,34 +5,17 @@ import RecapDashboard from "../../components/RecapDashboard";
 import Delete from "../../assets/trash.svg";
 import Edit from "../../assets/edit.svg";
 import { useEffect } from "react";
-import { useDispatch } from 'react-redux';
-import { fetchVaccine } from "../../store/features/vaccineSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteVaccine, fetchVaccine } from "../../store/features/vaccineSlice";
 
 const ManageVaccine = () => {
-  const datas = [
-    {
-      no: 1,
-      jenis: "Corona Vac",
-      kuota: "2000",
-      expired: "2023-11-14",
-    },
-    {
-      no: 2,
-      jenis: "Moderna",
-      kuota: "1000",
-      expired: "2023-11-14",
-    },
-    {
-      no: 3,
-      jenis: "AstraZeneca",
-      kuota: "3000",
-      expired: "2023-11-14",
-    },
-  ];
+  const dataVaccine = useSelector((state)=> state.vaccine.data.data)
+  console.log(dataVaccine)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchVaccine())
-  }, [ ]);
+  }, []);
+
   return (
     <section className="h-full w-full px-8 mt-8">
       <RecapDashboard title="Manage Vaksin" />
@@ -83,24 +66,25 @@ const ManageVaccine = () => {
           </tr>
         </thead>
         <tbody>
-          {datas.map((data) => (
-            <tr key={data.no} className="border-b-[1px]">
-              <th className="font-normal">{data.no}</th>
-              <th className="font-normal">{data.jenis}</th>
-              <th className="font-normal">{data.kuota}</th>
-              <th className="font-normal">{data.expired}</th>
-              <th className="w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal">
-                <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded">
-                  <img src={Delete} alt="del" />
-                </button>
-                <Link
-                  to="edit-vaksin"
-                  className="bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded"
-                >
-                  <img src={Edit} alt="edit" />
-                </Link>
-              </th>
-            </tr>
+          {dataVaccine.data.map((vaccine) => (
+            <tr key={vaccine.vaccine_id} className="border-b-[1px]">
+            <th className="font-normal">{vaccine.vaccine_id}</th>
+            <th className="font-normal">{vaccine.name}</th>
+            <th className="font-normal">{vaccine.kuota}</th>
+            <th className="font-normal">{vaccine.expired}</th>
+            <th className="w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal">
+              <button  
+              className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded">
+                <img src={Delete} alt="del" />
+              </button>
+              <Link
+                to="edit-vaksin"
+                className="bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded"
+              >
+                <img src={Edit} alt="edit" />
+              </Link>
+            </th>
+          </tr>
           ))}
         </tbody>
       </table>

@@ -18,7 +18,8 @@ const vaccineAPI = {
           console.log(err);
         }
       },
-    };
+  };
+
 
 
 

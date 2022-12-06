@@ -4,40 +4,18 @@ import RecapDashboard from "../../components/RecapDashboard";
 import ButtonAdd from "../../components/ButtonAdd";
 import Delete from "../../assets/trash.svg";
 import Edit from "../../assets/edit.svg";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBooking } from "../../store/features/bookingSlice";
 
 const ManageBooking = () => {
-  const datas = [
-    {
-      no: "1",
-      nama: "Tengku",
-      nik: "1571021703010022",
-      waktu: "08:00 - 11:00",
-      tanggal: "2022-11-14",
-      dosis: "Pertama",
-      antrian: "1",
-      status: "Proses",
-    },
-    {
-      no: "2",
-      nama: "Afifah",
-      nik: "1571021703010022",
-      waktu: "08:00 - 11:00",
-      tanggal: "2022-11-14",
-      dosis: "Pertama",
-      antrian: "2",
-      status: "Proses",
-    },
-    {
-      no: "3",
-      nama: "Eridani",
-      nik: "1571021703010022",
-      waktu: "08:00 - 11:00",
-      tanggal: "2022-11-14",
-      dosis: "Pertama",
-      antrian: "3",
-      status: "Proses",
-    },
-  ];
+  const dataBooking = useSelector((state) => state.booking.data);
+  console.log(dataBooking);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchBooking());
+  }, []);
 
   return (
     <section className="h-full w-full px-8 mt-8">
@@ -93,16 +71,18 @@ const ManageBooking = () => {
           </tr>
         </thead>
         <tbody>
-          {datas.map((data) => (
-            <tr key={data.no} className="border-b-[1px]">
-              <th className="font-normal">{data.no}</th>
-              <th className="font-normal">{data.nama}</th>
-              <th className="font-normal">{data.nik}</th>
-              <th className="font-normal">{data.waktu}</th>
-              <th className="font-normal">{data.tanggal}</th>
-              <th className="font-normal">{data.dosis}</th>
-              <th className="font-normal">{data.antrian}</th>
-              <th className="font-normal">{data.status}</th>
+          {/* {dataBooking.data.map((booking) => (
+            <tr key={booking.booking_id} className="border-b-[1px]">
+              <th className="font-normal">{booking.booking_id}</th>
+              <th className="font-normal">{booking.citizen_name}</th>
+              <th className="font-normal">{booking.nik}</th>
+              <th className="font-normal">
+                {booking.start_time} - {booking.end_time}
+              </th>
+              <th className="font-normal">{booking.date}</th>
+              <th className="font-normal">{booking.dosis}</th>
+              <th className="font-normal">{booking.queue}</th>
+              <th className="font-normal">{booking.status}</th>
               <th className="w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal">
                 <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded">
                   <img src={Delete} alt="del" />
@@ -115,7 +95,7 @@ const ManageBooking = () => {
                 </Link>
               </th>
             </tr>
-          ))}
+          ))} */}
         </tbody>
       </table>
     </section>

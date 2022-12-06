@@ -4,6 +4,9 @@ import ButtonAdd from "../../components/ButtonAdd";
 import RecapDashboard from "../../components/RecapDashboard";
 import Delete from "../../assets/trash.svg";
 import Edit from "../../assets/edit.svg";
+import { useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { fetchVaccine } from "../../store/features/vaccineSlice";
 
 const ManageVaccine = () => {
   const datas = [
@@ -26,7 +29,10 @@ const ManageVaccine = () => {
       expired: "2023-11-14",
     },
   ];
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchVaccine())
+  }, [ ]);
   return (
     <section className="h-full w-full px-8 mt-8">
       <RecapDashboard title="Manage Vaksin" />

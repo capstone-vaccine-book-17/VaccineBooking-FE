@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import adminAPI from "../../apis/admin.api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import adminAPI from '../../apis/admin.api';
 
 const initialState = {
   data: null,
-  error: null,
+  loading: false,
 };
 
-export const loginAdmin = createAsyncThunk("/auth/login", async (admin) => {
+export const loginAdmin = createAsyncThunk('/auth/login', async (admin) => {
   try {
     const res = await adminAPI.login(admin);
     return res.data.data.token;
@@ -16,12 +16,17 @@ export const loginAdmin = createAsyncThunk("/auth/login", async (admin) => {
 });
 
 const adminSlice = createSlice({
-  name: "adminToken",
+  name: 'adminToken',
   initialState,
   extraReducers(builder) {
-    builder.addCase(loginAdmin.fulfilled, (state, action) => {
-      state.data = action.payload;
-    });
+    builder
+      .addCase(loginAdmin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(loginAdmin.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.loading = false;
+      });
   },
 });
 

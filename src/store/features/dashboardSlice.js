@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import sessionAPI from '../../apis/session.api';
+import dashboardAPI from '../../apis/dashboard.api';
 
 const initialState = {
   data: [],
   error: false,
 };
 
-export const fetchSession = createAsyncThunk('/v1/session', async () => {
+export const fetchDashboard = createAsyncThunk('dashboard', async () => {
   try {
-    const res = await sessionAPI.getAllSession();
+    const res = await dashboardAPI.getDashboards();
     console.log(res);
     return res;
   } catch (err) {
@@ -16,19 +16,19 @@ export const fetchSession = createAsyncThunk('/v1/session', async () => {
   }
 });
 
-const adminSlice = createSlice({
-  name: 'session',
+const dashboardSlice = createSlice({
+  name: 'dashboard',
   initialState,
   extraReducers(builder) {
     builder
-      .addCase(fetchSession.pending, (state) => {
+      .addCase(fetchDashboard.pending, (state) => {
         state.pending = true;
       })
-      .addCase(fetchSession.fulfilled, (state, action) => {
+      .addCase(fetchDashboard.fulfilled, (state, action) => {
         state.data = action.payload;
         state.pending = true;
       });
   },
 });
 
-export default adminSlice.reducer;
+export default dashboardSlice.reducer;

@@ -1,22 +1,23 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import bookingAPI from "../../apis/booking.api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import bookingAPI from '../../apis/booking.api';
 
 const initialState = {
   data: [],
-  error: null,
+  loading: false,
 };
 
-export const fetchBooking = createAsyncThunk("/v1/booking/", async () => {
+export const fetchBooking = createAsyncThunk('/v1/booking/', async () => {
   try {
     const res = await bookingAPI.getBooking();
     console.log(res);
+    return res;
   } catch (err) {
     console.log(err);
   }
 });
 
 export const createBooking = createAsyncThunk(
-  "/v1/booking",
+  '/v1/booking',
   async (dataBooking) => {
     try {
       const res = await bookingAPI.createBooking(dataBooking);
@@ -52,15 +53,23 @@ export const createBooking = createAsyncThunk(
 // );
 
 const bookingSlice = createSlice({
-  name: "booking",
+  name: 'booking',
   initialState,
   extraReducers(builder) {
     builder
+      .addCase(fetchBooking.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(fetchBooking.fulfilled, (state, action) => {
         state.data = action.payload;
+        state.loading = false;
+      })
+      .addCase(createBooking.pending, (state) => {
+        state.loading = true;
       })
       .addCase(createBooking.fulfilled, (state, action) => {
         state.data = action.payload;
+        state.loading = false;
         // })
         // .addCase(deleteBooking.fulfilled, (state, action) => {
         //   state.data = state.data.filter((x) => x !== action.payload.id);

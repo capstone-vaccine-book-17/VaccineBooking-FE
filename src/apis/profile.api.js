@@ -9,6 +9,7 @@ const profileAPI = {
             console.log(err);
         }
     },
+
 };
 
 export default profileAPI;

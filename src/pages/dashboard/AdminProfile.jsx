@@ -1,8 +1,16 @@
 import React from 'react';
 import TopSection from '../../components/TopSection';
 import Hospital from '../../assets/hospital.jpg';
+import { useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { fetchProfile } from '../../store/features/profileSlice';
 
 const AdminProfile = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProfile())
+  }, [ ]);
+
   return (
     <section className='h-full w-full px-8 mt-8'>
       <TopSection title='Profile Admin' />

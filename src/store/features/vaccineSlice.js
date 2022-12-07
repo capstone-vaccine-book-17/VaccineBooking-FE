@@ -1,16 +1,15 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
-import vaccineAPI from '../../apis/vaccine.api';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import vaccineAPI from "../../apis/vaccine.api";
 
 const initialState = {
   data: [],
   loading: false,
 };
 
-export const fetchVaccine = createAsyncThunk('getVaccine', async () => {
+export const fetchVaccine = createAsyncThunk("getVaccine", async () => {
   try {
     const res = await vaccineAPI.getAllVaccine();
-    console.log(res);
     return res.data.data;
   } catch (err) {
     console.log(err);
@@ -18,25 +17,24 @@ export const fetchVaccine = createAsyncThunk('getVaccine', async () => {
 });
 
 export const createVaccine = createAsyncThunk(
-  'createVaccine',
+  "createVaccine",
   async (dataVaccine) => {
     try {
       const res = await vaccineAPI
         .addVaccine(dataVaccine)
-        .then((res) =>
-          res.data.code === 200
-            ? toast.success('Tambah vaksin berhasil!')
-            : toast.warn('Tambah vaksin gagal!')
+        .then(
+          (res) =>
+            res.data.code === 200 && toast.success("Tambah vaksin berhasil!")
         );
-      console.log(res);
       return res;
     } catch (err) {
       console.log(err);
+      toast.warn("Tambah vaksin gagal!");
     }
   }
 );
 
-export const deleteVaccine = createAsyncThunk('deleteVaccine', async (id) => {
+export const deleteVaccine = createAsyncThunk("deleteVaccine", async (id) => {
   try {
     const res = await vaccineAPI.deleteVaccine(id);
     console.log(res);
@@ -47,7 +45,7 @@ export const deleteVaccine = createAsyncThunk('deleteVaccine', async (id) => {
 });
 
 const vaccineSlice = createSlice({
-  name: 'vaccine',
+  name: "vaccine",
   initialState,
   extraReducers(builder) {
     builder

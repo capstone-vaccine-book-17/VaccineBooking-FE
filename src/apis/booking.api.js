@@ -21,7 +21,7 @@ const bookingAPI = {
 
   // async deleteBooking(data){
   //   try {
-  //     const res = await axiosInstance.delete("", id);
+  //     const res = await axiosInstance.delete("/v1/booking/:id", id);
   //     return res;
   //   } catch (err) {
   //     console.log(err);

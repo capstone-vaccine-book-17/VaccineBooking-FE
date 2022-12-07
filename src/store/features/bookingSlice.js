@@ -1,30 +1,35 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import bookingAPI from '../../apis/booking.api';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import bookingAPI from "../../apis/booking.api";
+import { toast } from "react-toastify";
 
 const initialState = {
   data: [],
   loading: false,
 };
 
-export const fetchBooking = createAsyncThunk('/v1/booking/', async () => {
+export const fetchBooking = createAsyncThunk("/v1/booking/", async () => {
   try {
     const res = await bookingAPI.getBooking();
-    console.log(res.data.data);
-    return res;
+    return res.data.data;
   } catch (err) {
     console.log(err);
   }
 });
 
 export const createBooking = createAsyncThunk(
-  '/v1/booking',
+  "/v1/booking",
   async (dataBooking) => {
     try {
-      const res = await bookingAPI.createBooking(dataBooking);
-      console.log(res);
+      const res = await bookingAPI
+        .createBooking(dataBooking)
+        .then(
+          (res) =>
+            res.data.code === 200 && toast.success("Tambah booking berhasil!")
+        );
       return res.data;
     } catch (err) {
       console.log(err);
+      toast.warn("Tambah booking gagal!");
     }
   }
 );
@@ -53,7 +58,7 @@ export const createBooking = createAsyncThunk(
 // );
 
 const bookingSlice = createSlice({
-  name: 'booking',
+  name: "booking",
   initialState,
   extraReducers(builder) {
     builder

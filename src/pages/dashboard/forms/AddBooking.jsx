@@ -1,24 +1,16 @@
 import React from "react";
 import TopSection from "../../../components/TopSection";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { createBooking } from "../../../store/features/bookingSlice";
 
 const AddBooking = () => {
   const dispatch = useDispatch();
-
+  const datasSession = useSelector((state) => state.session.data);
   const { register, getValues, handleSubmit } = useForm();
 
   const handleAddBooking = () => {
-    dispatch(
-      createBooking({
-        address: "DKI Jakarta",
-        nama: "Halimah",
-        nik: "31720258965413256",
-        session_id: 1,
-      })
-    );
-    console.log(getValues());
+    dispatch(createBooking(getValues()));
   };
 
   return (
@@ -74,13 +66,22 @@ const AddBooking = () => {
               <label className="text-xl" htmlFor="session_id">
                 Sesi Tersedia
               </label>
-              <select className="bg-white border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-full p-3">
-                <option value="" disabled selected>
+              <select
+                {...register("session_id", {
+                  valueAsNumber: true,
+                  required: "Session is required!",
+                })}
+                className="bg-white border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-full p-3"
+              >
+                {datasSession?.map((session) => (
+                  <option value={session.session_id}>{session.name}</option>
+                ))}
+                {/* <option value="" disabled selected>
                   Pilih Sesi
                 </option>
                 <option value="1">Sesi 1</option>
                 <option value="2">Sesi 2</option>
-                <option value="3">Sesi 3</option>
+                <option value="3">Sesi 3</option> */}
               </select>
             </div>
             <div className="w-full flex justify-end">

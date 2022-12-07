@@ -1,16 +1,15 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
-import sessionAPI from '../../apis/session.api';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import sessionAPI from "../../apis/session.api";
 
 const initialState = {
   data: [],
   loading: false,
 };
 
-export const fetchSession = createAsyncThunk('fetchSession', async () => {
+export const fetchSession = createAsyncThunk("fetchSession", async () => {
   try {
     const res = await sessionAPI.getAllSession();
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     console.log(err);
@@ -18,26 +17,25 @@ export const fetchSession = createAsyncThunk('fetchSession', async () => {
 });
 
 export const createSession = createAsyncThunk(
-  'createSession',
+  "createSession",
   async (dataSession) => {
     try {
       const res = await sessionAPI
         .addSession(dataSession)
-        .then((res) =>
-          res.data.code === 200
-            ? toast.success('Tambah vaksin berhasil!')
-            : toast.warn('Tambah vaksin gagal!')
+        .then(
+          (res) =>
+            res.data.code === 200 && toast.success("Tambah sesi berhasil!")
         );
-      console.log(res);
       return res;
     } catch (err) {
       console.log(err);
+      toast.warn("Tambah sesi gagal!");
     }
   }
 );
 
 const adminSlice = createSlice({
-  name: 'session',
+  name: "session",
   initialState,
   extraReducers(builder) {
     builder

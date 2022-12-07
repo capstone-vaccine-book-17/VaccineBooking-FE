@@ -1,15 +1,14 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import dashboardAPI from '../../apis/dashboard.api';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import dashboardAPI from "../../apis/dashboard.api";
 
 const initialState = {
   data: [],
   error: false,
 };
 
-export const fetchDashboard = createAsyncThunk('dashboard', async () => {
+export const fetchDashboard = createAsyncThunk("dashboard", async () => {
   try {
     const res = await dashboardAPI.getDashboards();
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     console.log(err);
@@ -17,7 +16,7 @@ export const fetchDashboard = createAsyncThunk('dashboard', async () => {
 });
 
 const dashboardSlice = createSlice({
-  name: 'dashboard',
+  name: "dashboard",
   initialState,
   extraReducers(builder) {
     builder

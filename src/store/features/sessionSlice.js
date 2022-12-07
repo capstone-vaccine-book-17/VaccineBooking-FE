@@ -1,15 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import sessionAPI from "../../apis/session.api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import sessionAPI from '../../apis/session.api';
 
 const initialState = {
-  data: null,
-  error: null,
+  data: [],
+  error: false,
 };
 
-export const fetchSession = createAsyncThunk("/v1/session", async () => {
+export const fetchSession = createAsyncThunk('/v1/session', async () => {
   try {
     const res = await sessionAPI.getAllSession();
-    console.log(res);
+    console.log(res.data.data);
     return res;
   } catch (err) {
     console.log(err);
@@ -17,12 +17,17 @@ export const fetchSession = createAsyncThunk("/v1/session", async () => {
 });
 
 const adminSlice = createSlice({
-  name: "session",
+  name: 'session',
   initialState,
   extraReducers(builder) {
-    builder.addCase(fetchSession.fulfilled, (state, action) => {
-      state.data = action.payload;
-    });
+    builder
+      .addCase(fetchSession.pending, (state) => {
+        state.pending = true;
+      })
+      .addCase(fetchSession.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.pending = true;
+      });
   },
 });
 

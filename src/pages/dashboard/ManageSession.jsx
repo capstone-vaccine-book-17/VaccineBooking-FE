@@ -4,52 +4,11 @@ import RecapDashboard from '../../components/RecapDashboard';
 import ButtonAdd from '../../components/ButtonAdd';
 import Delete from '../../assets/trash.svg';
 import Edit from '../../assets/edit.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchSession } from '../../store/features/sessionSlice';
 
 const ManageSession = () => {
-  const data = [
-    {
-      no: 1,
-      session: 'Sesi 1',
-      date: '14-11-2022',
-      time: '08.00 - 10.00',
-      jenis: 'Sinovac',
-      kuota: '200',
-      dosis: 'Pertama',
-      status: 'Selesai',
-    },
-    {
-      no: 2,
-      session: 'Sesi 2',
-      date: '14-11-2022',
-      time: '13.00 - 15.00',
-      jenis: 'Corona Vac',
-      kuota: '200',
-      dosis: 'Kedua',
-      status: 'Proses',
-    },
-    {
-      no: 3,
-      session: 'Sesi 3',
-      date: '14-11-2022',
-      time: '15.00 - 17.00',
-      jenis: 'AstraZeneca',
-      kuota: '200',
-      dosis: 'Ketiga',
-      status: 'Proses',
-    },
-    {
-      no: 4,
-      session: 'Sesi 4',
-      date: '14-11-2022',
-      time: '15.00 - 17.00',
-      jenis: 'Booster',
-      kuota: '200',
-      dosis: 'Keempat',
-      status: 'Proses',
-    },
-  ];
+  const datasSession = useSelector((state) => state.session.data);
 
   const dispatch = useDispatch();
 
@@ -111,16 +70,18 @@ const ManageSession = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((data) => (
-            <tr key={data.no} className='border-b-[1px]'>
-              <th className='font-normal'>{data.no}</th>
-              <th className='font-normal'>{data.session}</th>
-              <th className='font-normal'>{data.date}</th>
-              <th className='font-normal'>{data.time}</th>
-              <th className='font-normal'>{data.jenis}</th>
-              <th className='font-normal'>{data.kuota}</th>
-              <th className='font-normal'>{data.dosis}</th>
-              <th className='font-normal'>{data.status}</th>
+          {datasSession?.map((session, index) => (
+            <tr key={session.session_id} className='border-b-[1px]'>
+              <th className='font-normal'>{index + 1}</th>
+              <th className='font-normal'>{session.name}</th>
+              <th className='font-normal'>{session.date}</th>
+              <th className='font-normal'>
+                {session.startTime} - {session.endTime}
+              </th>
+              <th className='font-normal'>{session.vaccine_name}</th>
+              <th className='font-normal'>{session.kuota}</th>
+              <th className='font-normal'>{session.dosis}</th>
+              <th className='font-normal'>{session.status}</th>
               <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal '>
                 <button className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded'>
                   <img src={Delete} alt='del' />

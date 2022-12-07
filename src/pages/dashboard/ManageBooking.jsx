@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBooking } from '../../store/features/bookingSlice';
 
 const ManageBooking = () => {
-  const dataBooking = useSelector((state) => state.booking.data.data);
+  const dataBooking = useSelector((state) => state.booking.data);
   console.log(dataBooking);
 
   const dispatch = useDispatch();

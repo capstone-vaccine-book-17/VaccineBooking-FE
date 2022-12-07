@@ -9,7 +9,7 @@ const initialState = {
 export const fetchSession = createAsyncThunk('/v1/session', async () => {
   try {
     const res = await sessionAPI.getAllSession();
-    console.log(res);
+    console.log(res.data.data);
     return res;
   } catch (err) {
     console.log(err);

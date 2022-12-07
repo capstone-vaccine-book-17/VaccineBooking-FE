@@ -9,7 +9,7 @@ const initialState = {
 export const fetchBooking = createAsyncThunk('/v1/booking/', async () => {
   try {
     const res = await bookingAPI.getBooking();
-    console.log(res);
+    console.log(res.data.data);
     return res;
   } catch (err) {
     console.log(err);

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteVaccine, fetchVaccine } from '../../store/features/vaccineSlice';
 
 const ManageVaccine = () => {
-  const dataVaccine = useSelector((state) => state.vaccine.data.data);
+  const dataVaccine = useSelector((state) => state.vaccine.data);
 
   const dispatch = useDispatch();
 
@@ -71,9 +71,9 @@ const ManageVaccine = () => {
           </tr>
         </thead>
         <tbody>
-          {dataVaccine?.data.map((vaccine) => (
+          {dataVaccine?.map((vaccine, index) => (
             <tr key={vaccine.vaccine_id} className='border-b-[1px]'>
-              <th className='font-normal'>{vaccine.vaccine_id}</th>
+              <th className='font-normal'>{index + 1}</th>
               <th className='font-normal'>{vaccine.name}</th>
               <th className='font-normal'>{vaccine.kuota}</th>
               <th className='font-normal'>{vaccine.expired}</th>

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import vaccineAPI from '../../apis/vaccine.api';
 
 const initialState = {
@@ -10,7 +11,7 @@ export const fetchVaccine = createAsyncThunk('getVaccine', async () => {
   try {
     const res = await vaccineAPI.getAllVaccine();
     console.log(res);
-    return res;
+    return res.data.data;
   } catch (err) {
     console.log(err);
   }
@@ -20,7 +21,13 @@ export const createVaccine = createAsyncThunk(
   'createVaccine',
   async (dataVaccine) => {
     try {
-      const res = await vaccineAPI.addVaccine(dataVaccine);
+      const res = await vaccineAPI
+        .addVaccine(dataVaccine)
+        .then((res) =>
+          res.data.code === 200
+            ? toast.success('Tambah vaksin berhasil!')
+            : toast.warn('Tambah vaksin gagal!')
+        );
       console.log(res);
       return res;
     } catch (err) {
@@ -55,7 +62,7 @@ const vaccineSlice = createSlice({
         state.loading = true;
       })
       .addCase(createVaccine.fulfilled, (state, action) => {
-        state.data.push(action.payload);
+        state.data.push({ ...action.payload });
         state.loading = false;
       })
       .addCase(deleteVaccine.pending, (state) => {

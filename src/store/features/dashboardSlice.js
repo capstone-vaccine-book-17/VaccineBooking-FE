@@ -9,8 +9,8 @@ const initialState = {
 export const fetchDashboard = createAsyncThunk('dashboard', async () => {
   try {
     const res = await dashboardAPI.getDashboards();
-    console.log(res);
-    return res;
+    console.log(res.data.data);
+    return res.data.data;
   } catch (err) {
     console.log(err);
   }

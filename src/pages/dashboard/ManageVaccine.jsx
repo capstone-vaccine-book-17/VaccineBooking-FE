@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonAdd from '../../components/ButtonAdd';
 import RecapDashboard from '../../components/RecapDashboard';
@@ -10,6 +10,8 @@ import { deleteVaccine, fetchVaccine } from '../../store/features/vaccineSlice';
 
 const ManageVaccine = () => {
   const dataVaccine = useSelector((state) => state.vaccine.data);
+
+  const [search, setSearch] = useState('');
 
   const dispatch = useDispatch();
 
@@ -32,6 +34,7 @@ const ManageVaccine = () => {
                 className='flex-[70%] bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5'
                 type='text'
                 placeholder='Cari......'
+                onChange={(e) => setSearch(e.target.value)}
               />
               <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
                 <svg
@@ -71,30 +74,32 @@ const ManageVaccine = () => {
           </tr>
         </thead>
         <tbody>
-          {dataVaccine?.map((vaccine, index) => (
-            <tr key={vaccine.vaccine_id} className='border-b-[1px]'>
-              <th className='font-normal'>{index + 1}</th>
-              <th className='font-normal'>{vaccine.name}</th>
-              <th className='font-normal'>{vaccine.kuota}</th>
-              <th className='font-normal'>{vaccine.expired}</th>
-              <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal'>
-                <button
-                  onClick={() => {
-                    removeVaccine(vaccine.vaccine_id);
-                  }}
-                  className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded'
-                >
-                  <img src={Delete} alt='del' />
-                </button>
-                <Link
-                  to='edit-vaksin'
-                  className='bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded'
-                >
-                  <img src={Edit} alt='edit' />
-                </Link>
-              </th>
-            </tr>
-          ))}
+          {dataVaccine
+            ?.filter((vaccine) => vaccine.name.toLowerCase().includes(search))
+            .map((vaccine, index) => (
+              <tr key={vaccine.vaccine_id} className='border-b-[1px]'>
+                <th className='font-normal'>{index + 1}</th>
+                <th className='font-normal'>{vaccine.name}</th>
+                <th className='font-normal'>{vaccine.kuota}</th>
+                <th className='font-normal'>{vaccine.expired}</th>
+                <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal'>
+                  <button
+                    onClick={() => {
+                      removeVaccine(vaccine.vaccine_id);
+                    }}
+                    className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded'
+                  >
+                    <img src={Delete} alt='del' />
+                  </button>
+                  <Link
+                    to='edit-vaksin'
+                    className='bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded'
+                  >
+                    <img src={Edit} alt='edit' />
+                  </Link>
+                </th>
+              </tr>
+            ))}
         </tbody>
       </table>
     </section>

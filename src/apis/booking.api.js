@@ -19,6 +19,15 @@ const bookingAPI = {
     }
   },
 
+  async getBookingByID(id) {
+    try {
+      const res = await axiosInstance.get(`/v1/booking/${id}`);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   // async deleteBooking(data){
   //   try {
   //     const res = await axiosInstance.delete("/v1/booking/:id", id);
@@ -28,14 +37,14 @@ const bookingAPI = {
   //   }
   // }
 
-  // async updateBooking(id) {
-  //   try {
-  //     const res = await axiosInstance.put("/v1/profile/update", id);
-  //     return res;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
+  async updateBooking(id) {
+    try {
+      const res = await axiosInstance.put(`/v1/booking/${id}`);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
 
 export default bookingAPI;

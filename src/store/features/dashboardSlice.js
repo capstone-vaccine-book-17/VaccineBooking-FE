@@ -21,11 +21,11 @@ const dashboardSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchDashboard.pending, (state) => {
-        state.pending = true;
+        state.loading = true;
       })
       .addCase(fetchDashboard.fulfilled, (state, action) => {
         state.data = action.payload;
-        state.pending = true;
+        state.loading = false;
       });
   },
 });

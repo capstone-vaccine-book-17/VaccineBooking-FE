@@ -26,7 +26,7 @@ export const createVaccine = createAsyncThunk(
           (res) =>
             res.data.code === 200 && toast.success("Tambah vaksin berhasil!")
         );
-      return res;
+      return res.data;
     } catch (err) {
       console.log(err);
       toast.warn("Tambah vaksin gagal!");
@@ -60,7 +60,7 @@ const vaccineSlice = createSlice({
         state.loading = true;
       })
       .addCase(createVaccine.fulfilled, (state, action) => {
-        state.data.push({ ...action.payload });
+        state.data = action.payload;
         state.loading = false;
       })
       .addCase(deleteVaccine.pending, (state) => {

@@ -4,10 +4,11 @@ import { toast } from "react-toastify";
 
 const initialState = {
   data: [],
+  dataID: [],
   loading: false,
 };
 
-export const fetchBooking = createAsyncThunk("/v1/booking/", async () => {
+export const fetchBooking = createAsyncThunk("getBooking", async () => {
   try {
     const res = await bookingAPI.getBooking();
     return res.data.data;
@@ -16,8 +17,18 @@ export const fetchBooking = createAsyncThunk("/v1/booking/", async () => {
   }
 });
 
+export const getBookingByID = createAsyncThunk("bookingID", async (id) => {
+  try {
+    const res = await bookingAPI.getBookingByID(id);
+    console.log(res.data);
+    return res.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export const createBooking = createAsyncThunk(
-  "/v1/booking",
+  "addBooking",
   async (dataBooking) => {
     try {
       const res = await bookingAPI
@@ -34,28 +45,15 @@ export const createBooking = createAsyncThunk(
   }
 );
 
-// export const deleteBooking = createAsyncThunk("", async (id) => {
-//   try {
-//     const res = await bookingAPI.deleteBooking(id);
-//     console.log(res);
-//     return res.data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
-
-// export const updateBooking = createAsyncThunk(
-//   "/v1/profile/update",
-//   async (id) => {
-//     try {
-//       const res = await bookingAPI.updateBooking(id);
-//       console.log(res);
-//       return res.data;
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-// );
+export const updateBooking = createAsyncThunk("updateBooking", async (id) => {
+  try {
+    const res = await bookingAPI.updateBooking(id);
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 const bookingSlice = createSlice({
   name: "booking",
@@ -69,23 +67,32 @@ const bookingSlice = createSlice({
         state.data = action.payload;
         state.loading = false;
       })
+      .addCase(getBookingByID.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getBookingByID.fulfilled, (state, action) => {
+        state.dataID = action.payload;
+        state.loading = false;
+      })
       .addCase(createBooking.pending, (state) => {
         state.loading = true;
       })
       .addCase(createBooking.fulfilled, (state, action) => {
         state.data = action.payload;
         state.loading = false;
-        // })
-        // .addCase(deleteBooking.fulfilled, (state, action) => {
-        //   state.data = state.data.filter((x) => x !== action.payload.id);
-        // })
-        // .addCase(updateBooking.fulfilled, (state, action) => {
-        //   state.data = state.data.map((x) => {
-        // } if () {
-        //   return { ..., isDone: !.isDone};
-        // } else {
-        //   return ;
-        // });
+      })
+      .addCase(updateBooking.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateBooking.fulfilled, (state, action) => {
+        state.data = state.data.map((booking) => {
+          if (booking.booking_id === state.dataID.id) {
+            return { ...booking, status: action.payload.status };
+          } else {
+            return booking;
+          }
+        });
+        state.loading = false;
       });
   },
 });

@@ -47,7 +47,7 @@ const AddVaccine = () => {
                   valueAsNumber: true,
                   required: "kuota is required!",
                 })}
-                placeholder="00:00"
+                placeholder="Masukkan Jumlah Kuota"
               />
             </div>
           </div>

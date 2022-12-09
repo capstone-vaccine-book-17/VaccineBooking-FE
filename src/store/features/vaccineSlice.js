@@ -1,13 +1,13 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import vaccineAPI from "../../apis/vaccine.api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import vaccineAPI from '../../apis/vaccine.api';
 
 const initialState = {
   data: [],
   loading: false,
 };
 
-export const fetchVaccine = createAsyncThunk("getVaccine", async () => {
+export const fetchVaccine = createAsyncThunk('getVaccine', async () => {
   try {
     const res = await vaccineAPI.getAllVaccine();
     return res.data.data;
@@ -17,24 +17,24 @@ export const fetchVaccine = createAsyncThunk("getVaccine", async () => {
 });
 
 export const createVaccine = createAsyncThunk(
-  "createVaccine",
+  'createVaccine',
   async (dataVaccine) => {
     try {
       const res = await vaccineAPI
         .addVaccine(dataVaccine)
         .then(
           (res) =>
-            res.data.code === 200 && toast.success("Tambah vaksin berhasil!")
+            res.data.code === 200 && toast.success('Tambah vaksin berhasil!')
         );
       return res.data;
     } catch (err) {
       console.log(err);
-      toast.warn("Tambah vaksin gagal!");
+      toast.warn('Tambah vaksin gagal!');
     }
   }
 );
 
-export const deleteVaccine = createAsyncThunk("deleteVaccine", async (id) => {
+export const deleteVaccine = createAsyncThunk('deleteVaccine', async (id) => {
   try {
     const res = await vaccineAPI.deleteVaccine(id);
     console.log(res);
@@ -44,8 +44,21 @@ export const deleteVaccine = createAsyncThunk("deleteVaccine", async (id) => {
   }
 });
 
+export const updateVaccine = createAsyncThunk(
+  'updateVaccine',
+  async (dataEdited) => {
+    try {
+      const res = await vaccineAPI.updateVaccine(dataEdited);
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
 const vaccineSlice = createSlice({
-  name: "vaccine",
+  name: 'vaccine',
   initialState,
   extraReducers(builder) {
     builder
@@ -69,6 +82,25 @@ const vaccineSlice = createSlice({
       .addCase(deleteVaccine.fulfilled, (state, action) => {
         const { id } = action.payload;
         state.data = state.data.filter((item) => item.id !== id);
+        state.loading = false;
+      })
+      .addCase(updateVaccine.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateVaccine.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.data = state.data.map((vaccine) => {
+          if (vaccine.vaccine_id === state.data.id) {
+            return {
+              ...vaccine,
+              name: action.payload.name,
+              kuota: action.payload.kuota,
+              expired: action.payload.expired,
+            };
+          } else {
+            return vaccine;
+          }
+        });
         state.loading = false;
       });
   },

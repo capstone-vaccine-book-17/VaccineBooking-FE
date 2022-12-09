@@ -25,6 +25,15 @@ const vaccineAPI = {
       console.log(err);
     }
   },
+  async updateVaccine(data) {
+    const id = data.id;
+    try {
+      const res = await axiosInstance.put(`/v1/vaccine/update/${id}`, data);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
 
 export default vaccineAPI;

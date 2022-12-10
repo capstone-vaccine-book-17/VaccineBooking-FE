@@ -1,21 +1,26 @@
 import React from 'react';
 import TopSection from '../../../components/TopSection';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { updateVaccine } from '../../../store/features/vaccineSlice';
 
 const EditVaccine = () => {
-  const dispatch = useDispatch();
-
   const { register, getValues, handleSubmit } = useForm();
 
-  const handleEditBooking = () => {
-    // const dataEdited = {
-    //   // id: vaccine.vaccine_id,
+  const dispatch = useDispatch();
 
-    // };
+  const dataToEdit = useSelector((state) => state.vaccine.dataID);
+  console.log(dataToEdit);
+
+  const handleEditBooking = () => {
+    const dataEdited = {
+      id: dataToEdit.vaccine_id,
+      name: getValues().name,
+      kuota: getValues().kuota,
+      expired: getValues().expired,
+    };
     console.log(getValues());
-    // dispatch(updateVaccine(dataEdited));
+    dispatch(updateVaccine(dataEdited));
   };
 
   return (
@@ -30,7 +35,7 @@ const EditVaccine = () => {
         >
           <div className='flex-1 space-y-8'>
             <div className='space-y-2'>
-              <label className='text-xl' for='jenisvaksin'>
+              <label className='text-xl' htmlFor='name'>
                 Jenis Vaksin
               </label>
               <input
@@ -38,7 +43,7 @@ const EditVaccine = () => {
                 {...register('name', {
                   required: 'name is required!',
                 })}
-                placeholder='Nama Vaksin'
+                placeholder={dataToEdit.name}
               />
             </div>
             <div className='space-y-2'>
@@ -52,13 +57,13 @@ const EditVaccine = () => {
                   valueAsNumber: true,
                   required: 'kuota is required!',
                 })}
-                placeholder='Masukkan Jumlah Kuota'
+                placeholder={dataToEdit.kuota}
               />
             </div>
           </div>
           <div className='flex-1 flex flex-col '>
             <div className='flex-1 space-y-2'>
-              <label className='text-xl' for='Sesi Tersedia'>
+              <label className='text-xl' htmlFor='date'>
                 Experied Time
               </label>
               <input

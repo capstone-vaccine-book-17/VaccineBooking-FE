@@ -83,6 +83,27 @@ const adminSlice = createSlice({
       .addCase(createSession.fulfilled, (state, action) => {
         state.data.push({ ...action.payload });
         state.loading = true;
+      })
+      .addCase(updateSession.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateSession.fulfilled, (state, action) => {
+        state.data = state.data.map((session) => {
+          if (session.session_id === state.data.id) {
+            return {
+              ...session,
+              name: action.payload.name,
+              vaccine_id: action.payload.vaccine_id,
+              startTime: action.payload.startTime,
+              kuota: action.payload.kuota,
+              dosis: action.payload.dosis,
+              endTime: action.payload.endTime,
+            };
+          } else {
+            return session;
+          }
+        });
+        state.loading = false;
       });
   },
 });

@@ -4,6 +4,7 @@ import vaccineAPI from '../../apis/vaccine.api';
 
 const initialState = {
   data: [],
+  dataID: [],
   loading: false,
 };
 
@@ -33,6 +34,15 @@ export const createVaccine = createAsyncThunk(
     }
   }
 );
+
+export const getVaccineByID = createAsyncThunk('vaccineID', async (id) => {
+  try {
+    const res = await vaccineAPI.getVaccineByID(id);
+    return res.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 export const deleteVaccine = createAsyncThunk('deleteVaccine', async (id) => {
   try {
@@ -67,6 +77,13 @@ const vaccineSlice = createSlice({
       })
       .addCase(fetchVaccine.fulfilled, (state, action) => {
         state.data = action.payload;
+        state.loading = false;
+      })
+      .addCase(getVaccineByID.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getVaccineByID.fulfilled, (state, action) => {
+        state.dataID = action.payload;
         state.loading = false;
       })
       .addCase(createVaccine.pending, (state) => {

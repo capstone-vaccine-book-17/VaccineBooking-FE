@@ -6,7 +6,11 @@ import Delete from '../../assets/trash.svg';
 import Edit from '../../assets/edit.svg';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteVaccine, fetchVaccine } from '../../store/features/vaccineSlice';
+import {
+  deleteVaccine,
+  fetchVaccine,
+  getVaccineByID,
+} from '../../store/features/vaccineSlice';
 
 const ManageVaccine = () => {
   const dataVaccine = useSelector((state) => state.vaccine.data);
@@ -14,6 +18,10 @@ const ManageVaccine = () => {
   const [search, setSearch] = useState('');
 
   const dispatch = useDispatch();
+
+  const handleGetID = (id) => {
+    dispatch(getVaccineByID(id));
+  };
 
   useEffect(() => {
     dispatch(fetchVaccine());
@@ -95,7 +103,13 @@ const ManageVaccine = () => {
                     to='edit-vaksin'
                     className='bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded'
                   >
-                    <img src={Edit} alt='edit' />
+                    <button
+                      onClick={() => {
+                        handleGetID(vaccine.vaccine_id);
+                      }}
+                    >
+                      <img src={Edit} alt='edit' />
+                    </button>
                   </Link>
                 </th>
               </tr>

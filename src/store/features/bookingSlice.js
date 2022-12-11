@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import bookingAPI from '../../apis/booking.api';
-import { toast } from 'react-toastify';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import bookingAPI from "../../apis/booking.api";
+import { toast } from "react-toastify";
 
 const initialState = {
   data: [],
@@ -8,7 +8,7 @@ const initialState = {
   loading: false,
 };
 
-export const fetchBooking = createAsyncThunk('getBooking', async () => {
+export const fetchBooking = createAsyncThunk("getBooking", async () => {
   try {
     const res = await bookingAPI.getBooking();
     return res.data.data;
@@ -17,7 +17,7 @@ export const fetchBooking = createAsyncThunk('getBooking', async () => {
   }
 });
 
-export const getBookingByID = createAsyncThunk('bookingID', async (id) => {
+export const getBookingByID = createAsyncThunk("bookingID", async (id) => {
   try {
     const res = await bookingAPI.getBookingByID(id);
     console.log(res.data);
@@ -28,24 +28,24 @@ export const getBookingByID = createAsyncThunk('bookingID', async (id) => {
 });
 
 export const createBooking = createAsyncThunk(
-  'addBooking',
+  "addBooking",
   async (dataBooking) => {
     try {
       const res = await bookingAPI
         .createBooking(dataBooking)
         .then(
           (res) =>
-            res.data.code === 200 && toast.success('Tambah booking berhasil!')
+            res.data.code === 200 && toast.success("Tambah booking berhasil!")
         );
       return res.data;
     } catch (err) {
       console.log(err);
-      toast.warn('Tambah booking gagal!');
+      toast.warn("Tambah booking gagal!");
     }
   }
 );
 
-export const deleteBooking = createAsyncThunk('deleteBooking', async (id) => {
+export const deleteBooking = createAsyncThunk("deleteBooking", async (id) => {
   try {
     const res = await bookingAPI.deleteBooking(id);
     console.log(res);
@@ -56,20 +56,26 @@ export const deleteBooking = createAsyncThunk('deleteBooking', async (id) => {
 });
 
 export const updateBooking = createAsyncThunk(
-  'updateBooking',
+  "updateBooking",
   async (dataEdited) => {
     try {
-      const res = await bookingAPI.updateBooking(dataEdited);
+      const res = await bookingAPI
+        .updateBooking(dataEdited)
+        .then(
+          (res) =>
+            res.data.code === 200 && toast.success("Edit Booking berhasil!")
+        );
       console.log(res);
       return res;
     } catch (err) {
       console.log(err);
+      toast.warn("Edit booking gagal!");
     }
   }
 );
 
 const bookingSlice = createSlice({
-  name: 'booking',
+  name: "booking",
   initialState,
   extraReducers(builder) {
     builder

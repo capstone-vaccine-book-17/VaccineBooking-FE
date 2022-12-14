@@ -27,12 +27,13 @@ const ManageVaccine = () => {
     dispatch(fetchVaccine());
   }, [dispatch]);
 
-  const removeVaccine = (id) => {
+  const removeVaccine = (id, cb) => {
     dispatch(deleteVaccine(id));
+    cb();
   };
 
   return (
-    <section className='h-full w-full px-8 mt-8'>
+    <section className='h-full w-full mt-8'>
       <RecapDashboard title='Manage Vaksin' />
       <div className='flex items-center my-8 gap-48'>
         <div className='flex-1'>
@@ -93,7 +94,9 @@ const ManageVaccine = () => {
                 <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal'>
                   <button
                     onClick={() => {
-                      removeVaccine(vaccine.vaccine_id);
+                      removeVaccine(vaccine.vaccine_id, () => {
+                        dispatch(fetchVaccine());
+                      });
                     }}
                     className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded'
                   >

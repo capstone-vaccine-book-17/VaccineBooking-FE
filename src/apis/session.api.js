@@ -1,9 +1,10 @@
-import axiosInstance from "../configs/AxiosInstance";
+import { toast } from 'react-toastify';
+import axiosInstance from '../configs/AxiosInstance';
 
 const sessionAPI = {
   async getAllSession() {
     try {
-      const res = await axiosInstance.get("/v1/session/");
+      const res = await axiosInstance.get('/v1/session/');
       return res;
     } catch (err) {
       console.log(err);
@@ -21,10 +22,16 @@ const sessionAPI = {
 
   async addSession(data) {
     try {
-      const res = await axiosInstance.post("/v1/session/", data);
+      const res = await axiosInstance
+        .post('/v1/session/', data)
+        .then(
+          (res) =>
+            res.data.code === 200 && toast.success('Sesi berhasil ditambahkan!')
+        );
       return res;
     } catch (err) {
       console.log(err);
+      toast.warn(`${err.response.data.message}`);
     }
   },
 

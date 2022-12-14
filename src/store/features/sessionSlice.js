@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import sessionAPI from "../../apis/session.api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import sessionAPI from '../../apis/session.api';
 
 const initialState = {
   data: [],
@@ -8,7 +8,7 @@ const initialState = {
   loading: false,
 };
 
-export const fetchSession = createAsyncThunk("fetchSession", async () => {
+export const fetchSession = createAsyncThunk('fetchSession', async () => {
   try {
     const res = await sessionAPI.getAllSession();
     return res.data.data;
@@ -18,24 +18,19 @@ export const fetchSession = createAsyncThunk("fetchSession", async () => {
 });
 
 export const createSession = createAsyncThunk(
-  "createSession",
+  'createSession',
   async (dataSession) => {
     try {
-      const res = await sessionAPI
-        .addSession(dataSession)
-        .then(
-          (res) =>
-            res.data.code === 200 && toast.success("Tambah sesi berhasil!")
-        );
-      return res;
+      const res = await sessionAPI.addSession(dataSession);
+      console.log(res);
+      return res.data;
     } catch (err) {
       console.log(err);
-      toast.warn("Tambah sesi gagal!");
     }
   }
 );
 
-export const getSessionByID = createAsyncThunk("sessionID", async (id) => {
+export const getSessionByID = createAsyncThunk('sessionID', async (id) => {
   try {
     const res = await sessionAPI.getSessionByID(id);
     console.log(res.data);
@@ -45,7 +40,7 @@ export const getSessionByID = createAsyncThunk("sessionID", async (id) => {
   }
 });
 
-export const deleteSession = createAsyncThunk("deleteSession", async (id) => {
+export const deleteSession = createAsyncThunk('deleteSession', async (id) => {
   try {
     const res = await sessionAPI.deleteSession(id);
     console.log(res);
@@ -56,25 +51,25 @@ export const deleteSession = createAsyncThunk("deleteSession", async (id) => {
 });
 
 export const updateSession = createAsyncThunk(
-  "updateSession",
+  'updateSession',
   async (dataEdited) => {
     try {
       const res = await sessionAPI
         .updateSession(dataEdited)
         .then(
-          (res) => res.data.code === 200 && toast.success("Edit sesi berhasil!")
+          (res) => res.data.code === 200 && toast.success('Edit sesi berhasil!')
         );
       console.log(res);
       return res;
     } catch (err) {
       console.log(err);
-      toast.warn("Edit sesi gagal!");
+      toast.warn('Edit sesi gagal!');
     }
   }
 );
 
 const adminSlice = createSlice({
-  name: "session",
+  name: 'session',
   initialState,
   extraReducers(builder) {
     builder
@@ -96,15 +91,15 @@ const adminSlice = createSlice({
         state.loading = true;
       })
       .addCase(createSession.fulfilled, (state, action) => {
-        state.data.push({ ...action.payload });
+        state.data = action.payload;
         state.loading = true;
       })
       .addCase(deleteSession.pending, (state) => {
         state.loading = true;
       })
       .addCase(deleteSession.fulfilled, (state, action) => {
-        const { id } = action.payload;
-        state.data = state.data.filter((item) => item.id !== id);
+        // const { id } = action.payload;
+        // state.data = state.data.filter((item) => item.id !== id);
         state.loading = false;
       })
       .addCase(updateSession.pending, (state) => {

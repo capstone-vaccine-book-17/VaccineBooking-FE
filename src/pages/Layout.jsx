@@ -10,7 +10,7 @@ const Layout = () => {
         <Sidebar />
         <div className='w-full flex flex-col'>
           <Topbar />
-          <div className='h-screen overflow-y-scroll'>
+          <div className='h-screen overflow-y-scroll px-8'>
             <Outlet />
           </div>
         </div>

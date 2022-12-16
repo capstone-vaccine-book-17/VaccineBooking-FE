@@ -78,7 +78,7 @@ const adminSlice = createSlice({
       })
       .addCase(fetchSession.fulfilled, (state, action) => {
         state.data = action.payload;
-        state.loading = true;
+        state.loading = false;
       })
       .addCase(getSessionByID.pending, (state) => {
         state.loading = true;
@@ -98,8 +98,11 @@ const adminSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteSession.fulfilled, (state, action) => {
-        // const { id } = action.payload;
-        // state.data = state.data.filter((item) => item.id !== id);
+        const sessionId = action.meta.arg;
+        const updatedData = state.data.filter(
+          (item) => item.session_id !== sessionId
+        );
+        state.data = updatedData;
         state.loading = false;
       })
       .addCase(updateSession.pending, (state) => {

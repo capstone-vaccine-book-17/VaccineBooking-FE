@@ -11,9 +11,11 @@ import {
   getSessionByID,
 } from '../../store/features/sessionSlice';
 import { useState } from 'react';
+import LoaderData from '../../components/LoaderData';
 
 const ManageSession = () => {
   const datasSession = useSelector((state) => state.session.data);
+  const load = useSelector((state) => state.session.loading);
 
   const [search, setSearch] = useState('');
 
@@ -26,9 +28,8 @@ const ManageSession = () => {
     dispatch(fetchSession());
   }, [dispatch]);
 
-  const removeSession = (id, cb) => {
+  const removeSession = (id) => {
     dispatch(deleteSession(id));
-    cb();
   };
 
   return (
@@ -41,7 +42,7 @@ const ManageSession = () => {
               <input
                 className='flex-[70%] bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5'
                 type='text'
-                placeholder='Cari......'
+                placeholder='Cari sesi tersedia...'
                 onChange={(e) => setSearch(e.target.value)}
               />
               <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
@@ -71,79 +72,83 @@ const ManageSession = () => {
         </div>
         <ButtonAdd pathFor='add-sesi' btnFor='Tambah Sesi' />
       </div>
-      <table className='w-full rounded-lg shadow-md text-[#373737] bg-white'>
-        <thead>
-          <tr className='border-b-[1px]'>
-            <th className='py-4'>No</th>
-            <th className='py-4'>Nama Sesi</th>
-            <th className='py-4'>Tanggal</th>
-            <th className='py-4'>Jam</th>
-            <th className='py-4'>Jenis</th>
-            <th className='py-4'>Kuota</th>
-            <th className='py-4'>Dosis</th>
-            <th className='py-4'>Status</th>
-            <th className='w-[240px] py-4'>Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {datasSession
-            ?.filter((session) => session.name.toLowerCase().includes(search))
-            .map((session, index) => (
-              <tr key={session.session_id} className='border-b-[1px]'>
-                <th className='font-normal'>{index + 1}</th>
-                <th className='font-normal'>{session.name}</th>
-                <th className='font-normal'>{session.date}</th>
-                <th className='font-normal'>
-                  {session.startTime} - {session.endTime}
-                </th>
-                <th className='font-normal'>{session.vaccine_name}</th>
-                <th className='font-normal'>{session.kuota}</th>
-                <th className='font-normal capitalize'>{session.dosis}</th>
-                <th className='font-semibold capitalize'>
-                  <div className='flex justify-center'>
-                    {session.status === 'process' ? (
-                      <p className='w-full font-semibold text-[#7A2F0C] bg-[#FFF3D8] rounded-md py-1'>
-                        {session.status}
-                      </p>
-                    ) : session.status === 'batal' ? (
-                      <p className='w-full font-semibold text-[#930E2E] bg-[#FF9881] rounded-md py-1'>
-                        {session.status}
-                      </p>
-                    ) : (
-                      <p className='w-full font-semibold text-[#091A7A] bg-[#D6E4FF] rounded-md py-1'>
-                        {session.status}
-                      </p>
-                    )}
-                  </div>
-                </th>
-                <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal '>
-                  <button
-                    onClick={() => {
-                      removeSession(session.session_id, () => {
-                        dispatch(fetchSession());
-                      });
-                    }}
-                    className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded'
-                  >
-                    <img src={Delete} alt='del' />
-                  </button>
-                  <Link
-                    to='edit-sesi'
-                    className='bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded'
-                  >
+      {load ? (
+        <div className='w-full flex justify-center'>
+          <LoaderData />
+        </div>
+      ) : (
+        <table className='w-full rounded-lg shadow-md text-[#373737] bg-white'>
+          <thead>
+            <tr className='border-b-[1px]'>
+              <th className='py-4'>No</th>
+              <th className='py-4'>Nama Sesi</th>
+              <th className='py-4'>Tanggal</th>
+              <th className='py-4'>Jam</th>
+              <th className='py-4'>Jenis</th>
+              <th className='py-4'>Kuota</th>
+              <th className='py-4'>Dosis</th>
+              <th className='py-4'>Status</th>
+              <th className='w-[240px] py-4'>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {datasSession
+              ?.filter((session) => session.name.toLowerCase().includes(search))
+              .map((session, index) => (
+                <tr key={session.session_id} className='border-b-[1px]'>
+                  <th className='font-normal'>{index + 1}</th>
+                  <th className='font-normal'>{session.name}</th>
+                  <th className='font-normal'>{session.date}</th>
+                  <th className='font-normal'>
+                    {session.startTime} - {session.endTime}
+                  </th>
+                  <th className='font-normal'>{session.vaccine_name}</th>
+                  <th className='font-normal'>{session.kuota}</th>
+                  <th className='font-normal capitalize'>{session.dosis}</th>
+                  <th className='font-semibold capitalize'>
+                    <div className='flex justify-center'>
+                      {session.status === 'process' ? (
+                        <p className='w-full font-semibold text-[#7A2F0C] bg-[#FFF3D8] rounded-md py-1'>
+                          {session.status}
+                        </p>
+                      ) : session.status === 'batal' ? (
+                        <p className='w-full font-semibold text-[#930E2E] bg-[#FF9881] rounded-md py-1'>
+                          {session.status}
+                        </p>
+                      ) : (
+                        <p className='w-full font-semibold text-[#091A7A] bg-[#D6E4FF] rounded-md py-1'>
+                          {session.status}
+                        </p>
+                      )}
+                    </div>
+                  </th>
+                  <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal '>
                     <button
                       onClick={() => {
-                        handleGetID(session.session_id);
+                        removeSession(session.session_id);
                       }}
+                      className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded'
                     >
-                      <img src={Edit} alt='edit' />
+                      <img src={Delete} alt='del' />
                     </button>
-                  </Link>
-                </th>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+                    <Link
+                      to='edit-sesi'
+                      className='bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded'
+                    >
+                      <button
+                        onClick={() => {
+                          handleGetID(session.session_id);
+                        }}
+                      >
+                        <img src={Edit} alt='edit' />
+                      </button>
+                    </Link>
+                  </th>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      )}
       <br />
     </section>
   );

@@ -103,8 +103,11 @@ const vaccineSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteVaccine.fulfilled, (state, action) => {
-        // const { id } = action.payload;
-        // state.data = state.data.filter((item) => item.id !== id);
+        const vaccineId = action.meta.arg;
+        const updatedData = state.data.filter(
+          (item) => item.vaccine_id !== vaccineId
+        );
+        state.data = updatedData;
         state.loading = false;
       })
       .addCase(updateVaccine.pending, (state) => {

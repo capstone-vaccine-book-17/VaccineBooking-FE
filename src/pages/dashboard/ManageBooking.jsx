@@ -12,9 +12,11 @@ import {
   getBookingByID,
 } from '../../store/features/bookingSlice';
 import { useState } from 'react';
+import LoaderData from '../../components/LoaderData';
 
 const ManageBooking = () => {
   const dataBooking = useSelector((state) => state.booking.data);
+  const load = useSelector((state) => state.booking.loading);
 
   const [search, setSearch] = useState('');
 
@@ -27,9 +29,8 @@ const ManageBooking = () => {
     dispatch(fetchBooking());
   }, [dispatch]);
 
-  const removeBooking = (id, cb) => {
+  const removeBooking = (id) => {
     dispatch(deleteBooking(id));
-    cb();
   };
 
   return (
@@ -42,7 +43,7 @@ const ManageBooking = () => {
               <input
                 className='flex-[70%] bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5'
                 type='text'
-                placeholder='Cari......'
+                placeholder='Cari nama pemesan...'
                 onChange={(e) => setSearch(e.target.value)}
               />
               <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
@@ -72,81 +73,85 @@ const ManageBooking = () => {
         </div>
         <ButtonAdd pathFor='add-booking' btnFor='Tambah Booking' />
       </div>
-      <table className='w-full rounded-lg shadow-md text-[#373737] bg-white'>
-        <thead>
-          <tr className='border-b-[1px]'>
-            <th className='py-4'>No</th>
-            <th className='py-4'>Nama Pemesan</th>
-            <th className='py-4'>NIK</th>
-            <th className='py-4'>Waktu</th>
-            <th className='py-4'>Tanggal</th>
-            <th className='py-4'>Dosis</th>
-            <th className='py-4'>Antrian</th>
-            <th className='py-4'>Status Pesanan</th>
-            <th className='w-[240px] py-4'>Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dataBooking
-            ?.filter((booking) =>
-              booking.citizen_name.toLowerCase().includes(search)
-            )
-            .map((booking, index) => (
-              <tr key={booking.booking_id} className='border-b-[1px]'>
-                <th className='font-normal'>{index + 1}</th>
-                <th className='font-normal'>{booking.citizen_name}</th>
-                <th className='font-normal'>{booking.nik}</th>
-                <th className='font-normal'>
-                  {booking.start_time} - {booking.end_time}
-                </th>
-                <th className='font-normal'>{booking.date}</th>
-                <th className='font-normal capitalize'>{booking.dosis}</th>
-                <th className='font-normal'>{booking.queue}</th>
-                <th className='font-semibold capitalize'>
-                  <div className='flex justify-center'>
-                    {booking.status === 'process' ? (
-                      <p className='w-1/2 font-semibold text-[#7A2F0C] bg-[#FFF3D8] rounded-md py-1'>
-                        {booking.status}
-                      </p>
-                    ) : booking.status === 'batal' ? (
-                      <p className='w-1/2 font-semibold text-[#930E2E] bg-[#FF9881] rounded-md py-1'>
-                        {booking.status}
-                      </p>
-                    ) : (
-                      <p className='w-1/2 font-semibold text-[#091A7A] bg-[#D6E4FF] rounded-md py-1'>
-                        {booking.status}
-                      </p>
-                    )}
-                  </div>
-                </th>
-                <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal'>
-                  <button
-                    onClick={() => {
-                      removeBooking(booking.booking_id, () => {
-                        dispatch(fetchBooking());
-                      });
-                    }}
-                    className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded'
-                  >
-                    <img src={Delete} alt='del' />
-                  </button>
-                  <Link
-                    to='edit-booking'
-                    className='bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded'
-                  >
+      {load ? (
+        <div className='w-full flex justify-center'>
+          <LoaderData />
+        </div>
+      ) : (
+        <table className='w-full rounded-lg shadow-md text-[#373737] bg-white'>
+          <thead>
+            <tr className='border-b-[1px]'>
+              <th className='py-4'>No</th>
+              <th className='py-4'>Nama Pemesan</th>
+              <th className='py-4'>NIK</th>
+              <th className='py-4'>Waktu</th>
+              <th className='py-4'>Tanggal</th>
+              <th className='py-4'>Dosis</th>
+              <th className='py-4'>Antrian</th>
+              <th className='py-4'>Status Pesanan</th>
+              <th className='w-[240px] py-4'>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataBooking
+              ?.filter((booking) =>
+                booking.citizen_name.toLowerCase().includes(search)
+              )
+              .map((booking, index) => (
+                <tr key={booking.booking_id} className='border-b-[1px]'>
+                  <th className='font-normal'>{index + 1}</th>
+                  <th className='font-normal'>{booking.citizen_name}</th>
+                  <th className='font-normal'>{booking.nik}</th>
+                  <th className='font-normal'>
+                    {booking.start_time} - {booking.end_time}
+                  </th>
+                  <th className='font-normal'>{booking.date}</th>
+                  <th className='font-normal capitalize'>{booking.dosis}</th>
+                  <th className='font-normal'>{booking.queue}</th>
+                  <th className='font-semibold capitalize'>
+                    <div className='flex justify-center'>
+                      {booking.status === 'process' ? (
+                        <p className='w-1/2 font-semibold text-[#7A2F0C] bg-[#FFF3D8] rounded-md py-1'>
+                          {booking.status}
+                        </p>
+                      ) : booking.status === 'batal' ? (
+                        <p className='w-1/2 font-semibold text-[#930E2E] bg-[#FF9881] rounded-md py-1'>
+                          {booking.status}
+                        </p>
+                      ) : (
+                        <p className='w-1/2 font-semibold text-[#091A7A] bg-[#D6E4FF] rounded-md py-1'>
+                          {booking.status}
+                        </p>
+                      )}
+                    </div>
+                  </th>
+                  <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal'>
                     <button
                       onClick={() => {
-                        handleGetID(booking.booking_id);
+                        removeBooking(booking.booking_id);
                       }}
+                      className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded'
                     >
-                      <img src={Edit} alt='edit' />
+                      <img src={Delete} alt='del' />
                     </button>
-                  </Link>
-                </th>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+                    <Link
+                      to='edit-booking'
+                      className='bg-[#0057FF] hover:bg-blue-800 text-white py-2 px-4 rounded'
+                    >
+                      <button
+                        onClick={() => {
+                          handleGetID(booking.booking_id);
+                        }}
+                      >
+                        <img src={Edit} alt='edit' />
+                      </button>
+                    </Link>
+                  </th>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      )}
       <br />
     </section>
   );

@@ -98,8 +98,11 @@ const bookingSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteBooking.fulfilled, (state, action) => {
-        // const { id } = action.payload;
-        // state.data = state.data.filter((item) => item.id !== id);
+        const bookingId = action.meta.arg;
+        const updatedData = state.data.filter(
+          (item) => item.booking_id !== bookingId
+        );
+        state.data = updatedData;
         state.loading = false;
       })
       .addCase(updateBooking.pending, (state) => {

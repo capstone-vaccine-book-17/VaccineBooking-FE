@@ -13,11 +13,12 @@ import {
 } from '../../store/features/bookingSlice';
 import { useState } from 'react';
 import LoaderData from '../../components/LoaderData';
+import ModalBooking from '../../components/ModalBooking';
 
 const ManageBooking = () => {
   const dataBooking = useSelector((state) => state.booking.data);
   const load = useSelector((state) => state.booking.loading);
-
+  const [modalDel, setModalDel] = useState(false);
   const [search, setSearch] = useState('');
 
   const handleGetID = (id) => {
@@ -128,7 +129,8 @@ const ManageBooking = () => {
                   <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal'>
                     <button
                       onClick={() => {
-                        removeBooking(booking.booking_id);
+                        setModalDel(!modalDel);
+                        // removeBooking(booking.booking_id);
                       }}
                       className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded'
                     >
@@ -147,6 +149,12 @@ const ManageBooking = () => {
                       </button>
                     </Link>
                   </th>
+                  <ModalBooking
+                    isVisible={modalDel}
+                    onClose={() => setModalDel(!modalDel)}
+                    dataBooking={booking}
+                    deleteDataBooking={removeBooking}
+                  />
                 </tr>
               ))}
           </tbody>

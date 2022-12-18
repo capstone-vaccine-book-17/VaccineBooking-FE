@@ -12,11 +12,12 @@ import {
   getVaccineByID,
 } from '../../store/features/vaccineSlice';
 import LoaderData from '../../components/LoaderData';
+import ModalVaccine from '../../components/ModalVaccine';
 
 const ManageVaccine = () => {
   const dataVaccine = useSelector((state) => state.vaccine.data);
   const load = useSelector((state) => state.vaccine.loading);
-
+  const [modalDel, setModalDel] = useState(false);
   const [search, setSearch] = useState('');
 
   const dispatch = useDispatch();
@@ -100,7 +101,8 @@ const ManageVaccine = () => {
                   <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal'>
                     <button
                       onClick={() => {
-                        removeVaccine(vaccine.vaccine_id);
+                        setModalDel(!modalDel);
+                        // removeVaccine(vaccine.vaccine_id);
                       }}
                       className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded'
                     >
@@ -119,6 +121,12 @@ const ManageVaccine = () => {
                       </button>
                     </Link>
                   </th>
+                  <ModalVaccine
+                    isVisible={modalDel}
+                    onClose={() => setModalDel(!modalDel)}
+                    dataVaccine={vaccine}
+                    deleteDataVaccine={removeVaccine}
+                  />
                 </tr>
               ))}
           </tbody>

@@ -12,11 +12,12 @@ import {
 } from '../../store/features/sessionSlice';
 import { useState } from 'react';
 import LoaderData from '../../components/LoaderData';
+import ModalSession from '../../components/ModalSession';
 
 const ManageSession = () => {
   const datasSession = useSelector((state) => state.session.data);
   const load = useSelector((state) => state.session.loading);
-
+  const [modalDel, setModalDel] = useState(false);
   const [search, setSearch] = useState('');
 
   const handleGetID = (id) => {
@@ -125,7 +126,8 @@ const ManageSession = () => {
                   <th className='w-[240px] flex justify-center items-center gap-4 py-4 px-6 font-normal '>
                     <button
                       onClick={() => {
-                        removeSession(session.session_id);
+                        setModalDel(!modalDel);
+                        // removeSession(session.session_id);
                       }}
                       className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded'
                     >
@@ -144,6 +146,12 @@ const ManageSession = () => {
                       </button>
                     </Link>
                   </th>
+                  <ModalSession
+                    isVisible={modalDel}
+                    onClose={() => setModalDel(!modalDel)}
+                    dataSession={session}
+                    deleteDataSession={removeSession}
+                  />
                 </tr>
               ))}
           </tbody>

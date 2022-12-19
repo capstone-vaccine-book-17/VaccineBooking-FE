@@ -1,14 +1,18 @@
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 
 export const authAdmin = {
   setLogin: (data) => {
-    Cookies.set("token", data);
+    Cookies.set('token', data);
   },
   setAuth: () => {
-    if (Cookies.get("token")) {
+    if (Cookies.get('token')) {
       return true;
     } else {
       return false;
     }
+  },
+  setLogout: (navigate) => {
+    Cookies.remove('token', { path: '/' });
+    navigate('/');
   },
 };

@@ -4,7 +4,13 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
   body {
-    @apply font-poppins;
+    @apply font-poppins bg-[#fafafa];
+  }
+  input {
+    @apply rounded-md px-[20px] py-[12px] border-[1px] border-[#646464];
   }
 }

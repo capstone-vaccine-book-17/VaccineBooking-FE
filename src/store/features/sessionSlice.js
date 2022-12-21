@@ -98,7 +98,7 @@ const adminSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteSession.fulfilled, (state, action) => {
-        const sessionId = action.meta.arg;
+        const sessionId = state.dataID.session_id;
         const updatedData = state.data.filter(
           (item) => item.session_id !== sessionId
         );

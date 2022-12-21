@@ -127,7 +127,7 @@ const ManageSession = () => {
                     <button
                       onClick={() => {
                         setModalDel(!modalDel);
-                        // removeSession(session.session_id);
+                        handleGetID(session.session_id);
                       }}
                       className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded'
                     >

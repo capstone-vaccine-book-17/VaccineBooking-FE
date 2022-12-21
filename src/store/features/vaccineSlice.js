@@ -103,7 +103,7 @@ const vaccineSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteVaccine.fulfilled, (state, action) => {
-        const vaccineId = action.meta.arg;
+        const vaccineId = state.dataID.vaccine_id;
         const updatedData = state.data.filter(
           (item) => item.vaccine_id !== vaccineId
         );

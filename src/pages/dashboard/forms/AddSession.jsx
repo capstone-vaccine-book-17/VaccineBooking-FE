@@ -107,7 +107,7 @@ const AddSession = () => {
                 })}
                 className='bg-white border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-full p-3'
               >
-                {dataVaccine.map((vaksin) => (
+                {dataVaccine?.map((vaksin) => (
                   <option key={vaksin.vaccine_id} value={vaksin.vaccine_id}>
                     {vaksin.name}({vaksin.expired})
                   </option>

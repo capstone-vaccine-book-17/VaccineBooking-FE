@@ -102,7 +102,7 @@ const ManageVaccine = () => {
                     <button
                       onClick={() => {
                         setModalDel(!modalDel);
-                        // removeVaccine(vaccine.vaccine_id);
+                        handleGetID(vaccine.vaccine_id);
                       }}
                       className='bg-red-500 hover:bg-red-700 text-white py-2 px-4 mr-3 rounded'
                     >
